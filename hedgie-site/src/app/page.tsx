@@ -664,7 +664,7 @@ function FeaturePhoneDemo({ active }: { active: FeatureKey }) {
           {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
         </span>
         <span className="font-semibold" style={{ color: "var(--navy2)" }}>
-          WhatsApp·Hedgie
+          Telegram·Hedgie
         </span>
       </div>
 
