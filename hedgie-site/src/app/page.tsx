@@ -320,13 +320,12 @@ function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-3">
-          <div className="relative">
-            <span
-              className="block h-10 w-10 rounded-2xl"
-              style={{ background: "var(--primary)" }}
-            />
-            <BotMessageSquare className="absolute -right -top h-5 w-5 text-[color:var(--teal)]" />
-          </div>
+            <div className="relative">
+              <span className="relative block h-10 w-10 rounded-2xl bg-[color:var(--primary)]" />
+              <BotMessageSquare
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-5 w-5 text-[color:var(--teal)]"
+              />
+            </div>
           <span className="text-xl font-bold text-[color:var(--ink)]">Hedgie</span>
         </a>
 
@@ -436,8 +435,8 @@ function HeroPhoneDemo() {
         stepRef.current += 1;
       }, 1200);
     };
-    const init = setTimeout(tick, 600);
-    const interval = setInterval(tick, 3600);
+    const init = setTimeout(tick, 400);
+    const interval = setInterval(tick, 2400);
     return () => { clearTimeout(init); clearInterval(interval); };
   }, [steps]);
 
@@ -481,10 +480,10 @@ function FeaturesSection() {
         >
           Features
         </span>
-        <h2 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-[color:var(--ink)]">
+        <h2 className="mt-4 text-4xl md:text-7xl font-extrabold tracking-tight text-[color:var(--ink)]">
           From sending to staking — Hedgie handles it all!
         </h2>
-        <p className="mx-auto mt-3 max-w-4xl text-lg leading-8">
+        <p className="mx-auto mt-3 max-w-5xl text-lg leading-8">
           Hedgie brings Web3 to your conversations — helping you send value, grow communities, and build savings stories in one chat.
         </p>
       </div>
@@ -494,8 +493,8 @@ function FeaturesSection() {
         <FeaturePhoneDemo active={active} />
 
         {/* Right: controls + details */}
-        <div className="text-left md:pt-22">
-          <div className="flex flex-wrap gap-2">
+        <div className="text-left md:pt-0">
+          <div className="flex flex-wrap gap-4">
             {FEATURES.map((f) => (
               <button
                 key={f.key}
@@ -691,7 +690,7 @@ function Faq() {
 /* -------------------------------- FOOTER --------------------------------- */
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-300">
+    <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-500">
       © {new Date().getFullYear()} Hedgie — Built with ❤️ on Hedera
     </footer>
   );
