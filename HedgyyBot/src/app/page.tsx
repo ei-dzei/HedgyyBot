@@ -54,9 +54,9 @@ const FEATURES: Feature[] = [
     label: "/register",
     title: "Create a wallet, instantly",
     desc:
-      "Spin up a self-custodial wallet right inside chat — no installs, no seed phrases. Hedgyy guides recovery setup, safety checks, and first steps so you’re productive in seconds.",
+      "Spin up a self-custodial wallet right inside chat — no installs, no seed phrases. Hedgy guides recovery setup, safety checks, and first steps so you’re productive in seconds.",
     icon: Wallet,
-    userLine: "Hey Hedgyy, /register me",
+    userLine: "Hey Hedgy, /register me",
     botReply:
       "Wallet created ✅\nAddress: 0x4c…ed9\nNetwork: Hedera\nRecovery options: /settings",
     accent: "var(--primary)",
@@ -66,7 +66,7 @@ const FEATURES: Feature[] = [
     label: "/send",
     title: "Send & receive with confidence",
     desc:
-      "Transfer stablecoins or HBAR with tiny fees and clear receipts. Hedgyy confirms amounts and recipients, then links to the explorer for easy verification.",
+      "Transfer stablecoins or HBAR with tiny fees and clear receipts. Hedgy confirms amounts and recipients, then links to the explorer for easy verification.",
     icon: Send,
     userLine: "/send 10 USDC to @mia",
     botReply: "Sent 10 USDC to @mia 💸\nTxn: 0x8f…a21\nView on explorer →",
@@ -89,7 +89,7 @@ const FEATURES: Feature[] = [
     label: "/stake",
     title: "Stake to grow balances",
     desc:
-      "Lock tokens to earn transparent, on-chain rewards. Hedgyy tracks yields, unlock dates, and reminders — keeping complex math out of your way.",
+      "Lock tokens to earn transparent, on-chain rewards. Hedgy tracks yields, unlock dates, and reminders — keeping complex math out of your way.",
     icon: Lock,
     userLine: "/stake 250 HBAR",
     botReply: "Staked 250 HBAR 🌱\nAPY: 7.4%\nUnstake: /unstake",
@@ -98,15 +98,15 @@ const FEATURES: Feature[] = [
 ];
 
 /* ------------------------------ SHARED ---------------------------------- */
-function HedgyyAvatar({ size = 32 }: { size?: number }) {
+function HedgyAvatar({ size = 32 }: { size?: number }) {
   return (
     <div
       className="relative overflow-hidden rounded-full ring-1 ring-[color:var(--outline)] bg-[color:var(--muted)]"
       style={{ width: size, height: size }}
     >
       <Image
-        src="/Hedgyy.png"
-        alt="Hedgyy"
+        src="/Hedgy.png"
+        alt="Hedgy"
         fill
         sizes={`${size}px`}
         className="object-cover"
@@ -189,7 +189,7 @@ function BotBubble({
   return (
     <div className="flex items-start gap-6">
       <div className="mt-0.5">
-        <HedgyyAvatar size={avatarSize} />
+        <HedgyAvatar size={avatarSize} />
       </div>
       <div className="max-w-[78%]">
         <div
@@ -251,7 +251,7 @@ function TypingDots({ visible, light }: { visible: boolean; light?: boolean }) {
           className="flex items-start gap-6"
         >
           <div className="mt-0.5">
-            <HedgyyAvatar size={32} />
+            <HedgyAvatar size={32} />
           </div>
           <div
             className={cx(
@@ -326,7 +326,7 @@ function Navbar() {
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-5 w-5 text-[color:var(--teal)]"
               />
             </div>
-          <span className="text-xl font-bold text-[color:var(--ink)]">Hedgyy</span>
+          <span className="text-xl font-bold text-[color:var(--ink)]">Hedgy</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8 text-base">
@@ -336,7 +336,7 @@ function Navbar() {
         </div>
 
         <a
-          href="https://t.me/HedgyyBot/"
+          href="https://t.me/HedgyBot/"
           className="rounded-xl bg-[color:var(--primary)] px-4 py-2 text-base font-semibold text-white shadow-sm hover:shadow-[0_0_0_5px_rgba(34,158,217,0.12)]"
         >
           Try on Telegram
@@ -355,7 +355,7 @@ function Hero() {
         <div className="order-2 md:order-1">
           <div className="flex items-center gap-5">
             <div className="relative h-32 w-32 overflow-hidden rounded-3xl ring-3 ring-[color:var(--outline)]">
-              <Image src="/Hedgyy.png" alt="Hedgyy mascot" fill className="object-cover" sizes="128px" priority />
+              <Image src="/Hedgy.png" alt="Hedgy mascot" fill className="object-cover" sizes="128px" priority />
             </div>
             <span className="rounded-full border border-[color:var(--outline)] bg-[color:var(--surface)] px-3 py-1.5 text-sm font-medium text-slate-600">
               Built on Hedera • Telegram Ready
@@ -369,7 +369,7 @@ function Hero() {
             transition={{ duration: 0.5 }}
             className="mt-6 text-5xl md:text-7xl font-black tracking-tight text-[color:var(--ink)]"
           >
-            Meet <span className="text-[color:var(--primary)]">Hedgyy</span>
+            Meet <span className="text-[color:var(--primary)]">Hedgy</span>
           </motion.h1>
 
           <p className="mt-4 max-w-2xl text-lg leading-8">
@@ -378,7 +378,7 @@ function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href="https://t.me/HedgyyBot/"
+              href="https://t.me/HedgyBot/"
               className="inline-flex items-center rounded-xl bg-[color:var(--primary)] px-5 py-2.5 text-base font-semibold text-white"
             >
               Say hi on Telegram <ArrowRight className="ml-2 h-4 w-4" />
@@ -409,7 +409,7 @@ function HeroPhoneDemo() {
   const steps = useMemo(
     () =>
       [
-        { user: "Hey Hedgyy, /register me", bot: "Wallet created ✅  Address: 0x4c…ed9  Network: Hedera", accent: "var(--primary)" },
+        { user: "Hey Hedgy, /register me", bot: "Wallet created ✅  Address: 0x4c…ed9  Network: Hedera", accent: "var(--primary)" },
         { user: "/send 10 USDC to @mia", bot: "Sent 10 USDC to @mia 💸  Txn: 0x8f…a21", accent: "var(--teal)" },
         { user: "/launch $VIBES token for our group", bot: "$VIBES created 🎉  Supply: 1,000,000", accent: "var(--navy2)" },
         { user: "/stake 250 HBAR", bot: "Staked 250 HBAR 🌱  APY: 7.4%", accent: "var(--warm)" },
@@ -449,7 +449,7 @@ function HeroPhoneDemo() {
     <PhoneFrame width={HERO_W} height={HERO_H}>
       <div className="flex items-center justify-between px-6 pt-7 text-sm text-slate-600">
         <span>{new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</span>
-        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgyy</span>
+        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgy</span>
       </div>
       <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-2">
         <div className="mt-5 flex flex-col gap-5">
@@ -481,10 +481,10 @@ function FeaturesSection() {
           Features
         </span>
         <h2 className="mt-4 text-4xl md:text-7xl font-extrabold tracking-tight text-[color:var(--ink)]">
-          From sending to staking — Hedgyy handles it all!
+          From sending to staking — Hedgy handles it all!
         </h2>
         <p className="mx-auto mt-3 max-w-5xl text-lg leading-8">
-          Hedgyy brings Web3 to your conversations — helping you send value, grow communities, and build savings stories in one chat.
+          Hedgy brings Web3 to your conversations — helping you send value, grow communities, and build savings stories in one chat.
         </p>
       </div>
 
@@ -572,7 +572,7 @@ function FeaturePhoneDemo({ active }: { active: FeatureKey }) {
     <PhoneFrame width={FEAT_W} height={FEAT_H} tilt={-1}>
       <div className="flex items-center justify-between px-6 pt-7 text-sm text-slate-600">
         <span>{new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</span>
-        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgyy</span>
+        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgy</span>
       </div>
       <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-2">
         <div className="mt-5 flex flex-col gap-5">
@@ -595,9 +595,9 @@ function HowItWorks() {
   const steps = [
     {
       icon: BotMessageSquare,
-      title: "Start a chat with Hedgyy",
+      title: "Start a chat with Hedgy",
       body:
-        "Say hello on Telegram. Hedgyy sets up a secure session and offers smart prompts so you can explore features at your own pace.",
+        "Say hello on Telegram. Hedgy sets up a secure session and offers smart prompts so you can explore features at your own pace.",
     },
     {
       icon: Wallet,
@@ -647,7 +647,7 @@ function HowItWorks() {
 /* --------------------------------- FAQ ----------------------------------- */
 function Faq() {
   const items = [
-    { q: "Is Hedgyy self-custodial?", a: "Yes. Keys are created for you with recovery options. You stay in control while enjoying chat-native UX." },
+    { q: "Is Hedgy self-custodial?", a: "Yes. Keys are created for you with recovery options. You stay in control while enjoying chat-native UX." },
     { q: "Which chains are supported?", a: "Powered by Hedera for speed, low cost, and transparency." },
     { q: "Does this work in groups?", a: "Absolutely — tipping, token launches, leaderboards, and quests thrive in Telegram groups." },
   ];
@@ -691,7 +691,7 @@ function Faq() {
 function Footer() {
   return (
     <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-500">
-      © {new Date().getFullYear()} Hedgyy — Built with ❤️ on Hedera
+      © {new Date().getFullYear()} Hedgy — Built with ❤️ on Hedera
     </footer>
   );
 }
