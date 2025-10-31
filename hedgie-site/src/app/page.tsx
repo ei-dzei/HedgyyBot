@@ -68,7 +68,7 @@ const FEATURES: Feature[] = [
     desc:
       "Transfer stablecoins or HBAR with tiny fees and clear receipts. Hedgie confirms amounts and recipients, then links to the explorer for easy verification.",
     icon: Send,
-    userLine: "Send 10 USDC to @mia",
+    userLine: "/send 10 USDC to @mia",
     botReply: "Sent 10 USDC to @mia 💸\nTxn: 0x8f…a21\nView on explorer →",
     accent: "var(--teal)",
   },
@@ -79,7 +79,7 @@ const FEATURES: Feature[] = [
     desc:
       "Create a token for your group in a few messages. Define name, ticker, supply, and airdrop rules — then enable quests, badges, tipping, and gated channels.",
     icon: Rocket,
-    userLine: "Launch $VIBES token for our group",
+    userLine: "/launch $VIBES token for our group",
     botReply:
       "$VIBES created 🎉\nSupply: 1,000,000\nTicker: VIBES\nTry /airdrop 100 VIBES",
     accent: "var(--navy2)",
@@ -91,7 +91,7 @@ const FEATURES: Feature[] = [
     desc:
       "Lock tokens to earn transparent, on-chain rewards. Hedgie tracks yields, unlock dates, and reminders — keeping complex math out of your way.",
     icon: Lock,
-    userLine: "Stake 250 HBAR",
+    userLine: "/stake 250 HBAR",
     botReply: "Staked 250 HBAR 🌱\nAPY: 7.4%\nUnstake: /unstake",
     accent: "var(--warm)",
   },
@@ -325,7 +325,7 @@ function Navbar() {
               className="block h-10 w-10 rounded-2xl"
               style={{ background: "var(--primary)" }}
             />
-            <BotMessageSquare className="absolute -right-1 -top-1 h-5 w-5 text-[color:var(--teal)]" />
+            <BotMessageSquare className="absolute -right-1 -top-1 h-1 w-1 text-[color:var(--teal)]" />
           </div>
           <span className="text-xl font-bold text-[color:var(--ink)]">Hedgie</span>
         </a>
@@ -368,7 +368,7 @@ function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mt-6 text-5xl md:text-6xl font-black tracking-tight text-[color:var(--ink)]"
+            className="mt-6 text-5xl md:text-7xl font-black tracking-tight text-[color:var(--ink)]"
           >
             Meet <span className="text-[color:var(--primary)]">Hedgie</span>
           </motion.h1>
@@ -494,8 +494,8 @@ function FeaturesSection() {
         <FeaturePhoneDemo active={active} />
 
         {/* Right: controls + details */}
-        <div className="text-left md:pt-24">
-          <div className="flex flex-wrap gap-3">
+        <div className="text-left md:pt-22">
+          <div className="flex flex-wrap gap-2">
             {FEATURES.map((f) => (
               <button
                 key={f.key}
@@ -691,7 +691,7 @@ function Faq() {
 /* -------------------------------- FOOTER --------------------------------- */
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-500">
+    <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-300">
       © {new Date().getFullYear()} Hedgie — Built with ❤️ on Hedera
     </footer>
   );
