@@ -336,7 +336,7 @@ function Navbar() {
         </div>
 
         <a
-          href="https://t.me/"
+          href="https://t.me/HedgyyBot/"
           className="rounded-xl bg-[color:var(--primary)] px-4 py-2 text-base font-semibold text-white shadow-sm hover:shadow-[0_0_0_5px_rgba(34,158,217,0.12)]"
         >
           Try on Telegram
@@ -378,7 +378,7 @@ function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href="https://t.me/"
+              href="https://t.me/HedgyyBot/"
               className="inline-flex items-center rounded-xl bg-[color:var(--primary)] px-5 py-2.5 text-base font-semibold text-white"
             >
               Say hi on Telegram <ArrowRight className="ml-2 h-4 w-4" />
