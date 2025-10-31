@@ -325,7 +325,7 @@ function Navbar() {
               className="block h-10 w-10 rounded-2xl"
               style={{ background: "var(--primary)" }}
             />
-            <BotMessageSquare className="absolute -right-1 -top-1 h-1 w-1 text-[color:var(--teal)]" />
+            <BotMessageSquare className="absolute -right -top h-5 w-5 text-[color:var(--teal)]" />
           </div>
           <span className="text-xl font-bold text-[color:var(--ink)]">Hedgie</span>
         </a>
@@ -411,9 +411,9 @@ function HeroPhoneDemo() {
     () =>
       [
         { user: "Hey Hedgie, /register me", bot: "Wallet created ✅  Address: 0x4c…ed9  Network: Hedera", accent: "var(--primary)" },
-        { user: "Send 10 USDC to @mia", bot: "Sent 10 USDC to @mia 💸  Txn: 0x8f…a21", accent: "var(--teal)" },
-        { user: "Launch $VIBES token for our group", bot: "$VIBES created 🎉  Supply: 1,000,000", accent: "var(--navy2)" },
-        { user: "Stake 250 HBAR", bot: "Staked 250 HBAR 🌱  APY: 7.4%", accent: "var(--warm)" },
+        { user: "/send 10 USDC to @mia", bot: "Sent 10 USDC to @mia 💸  Txn: 0x8f…a21", accent: "var(--teal)" },
+        { user: "/launch $VIBES token for our group", bot: "$VIBES created 🎉  Supply: 1,000,000", accent: "var(--navy2)" },
+        { user: "/stake 250 HBAR", bot: "Staked 250 HBAR 🌱  APY: 7.4%", accent: "var(--warm)" },
       ] as const,
     []
   );
