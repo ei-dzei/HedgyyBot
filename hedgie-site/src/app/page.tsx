@@ -15,9 +15,7 @@ import {
 
 const inter = Inter({ subsets: ["latin"] });
 
-/* -------------------------------------------------------------------------- */
-/*                                   THEME                                    */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- THEME ---------------------------------- */
 const setBrandTheme = () => {
   const r = document.documentElement.style;
   r.setProperty("--bg", "#F7FAFD");
@@ -25,24 +23,20 @@ const setBrandTheme = () => {
   r.setProperty("--muted", "#F1F6FB");
   r.setProperty("--outline", "#E6EEF6");
   r.setProperty("--ink", "#0F172A");
-  r.setProperty("--text", "#334155"); 
+  r.setProperty("--text", "#334155");
 
-  // Hedgie branding colors
-  r.setProperty("--primary", "#229ED9"); // Telegram blue
-  r.setProperty("--teal", "#13E6D2");    // circuitry teal
-  r.setProperty("--navy", "#0D3156");    // deep navy
-  r.setProperty("--navy2", "#13426E");   // ocean navy
-  r.setProperty("--warm", "#FFB44F");    // accent
+  r.setProperty("--primary", "#229ED9");
+  r.setProperty("--teal", "#13E6D2");
+  r.setProperty("--navy", "#0D3156");
+  r.setProperty("--navy2", "#13426E");
+  r.setProperty("--warm", "#FFB44F");
 };
 
 const cx = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(" ");
 
-/* -------------------------------------------------------------------------- */
-/*                         FEATURES / COMMAND DEFINITIONS                      */
-/* -------------------------------------------------------------------------- */
+/* ------------------------- FEATURES / COMMANDS --------------------------- */
 type FeatureKey = "register" | "send" | "launch" | "stake";
-
 interface Feature {
   key: FeatureKey;
   label: string;
@@ -51,7 +45,7 @@ interface Feature {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   userLine: string;
   botReply: string;
-  accent: string; 
+  accent: string;
 }
 
 const FEATURES: Feature[] = [
@@ -60,7 +54,7 @@ const FEATURES: Feature[] = [
     label: "/register",
     title: "Create a wallet, instantly",
     desc:
-      "Spin up a self-custodial wallet right inside chat — no installs, no seed phrases. Hedgie guides recovery setup, safety checks, and your first steps so you’re productive in seconds.",
+      "Spin up a self-custodial wallet right inside chat — no installs, no seed phrases. Hedgie guides recovery setup, safety checks, and first steps so you’re productive in seconds.",
     icon: Wallet,
     userLine: "Hey Hedgie, /register me",
     botReply:
@@ -72,7 +66,7 @@ const FEATURES: Feature[] = [
     label: "/send",
     title: "Send & receive with confidence",
     desc:
-      "Transfer stablecoins or HBAR with tiny fees and clear receipts. Hedgie confirms amounts and recipients, then links the transaction to the explorer for easy verification.",
+      "Transfer stablecoins or HBAR with tiny fees and clear receipts. Hedgie confirms amounts and recipients, then links to the explorer for easy verification.",
     icon: Send,
     userLine: "Send 10 USDC to @mia",
     botReply: "Sent 10 USDC to @mia 💸\nTxn: 0x8f…a21\nView on explorer →",
@@ -103,10 +97,8 @@ const FEATURES: Feature[] = [
   },
 ];
 
-/* -------------------------------------------------------------------------- */
-/*                             SHARED: Hedgie Avatar                           */
-/* -------------------------------------------------------------------------- */
-function HedgieAvatar({ size = 36 }: { size?: number }) {
+/* ------------------------------ SHARED ---------------------------------- */
+function HedgieAvatar({ size = 32 }: { size?: number }) {
   return (
     <div
       className="relative overflow-hidden rounded-full ring-1 ring-[color:var(--outline)] bg-[color:var(--muted)]"
@@ -124,23 +116,12 @@ function HedgieAvatar({ size = 36 }: { size?: number }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                  UTIL                                      */
-/* -------------------------------------------------------------------------- */
 const nowTime = () =>
   new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-type Msg = {
-  id: string;
-  role: "user" | "bot";
-  text: string;
-  at: string;
-  accent?: string;
-};
+type Msg = { id: string; role: "user" | "bot"; text: string; at: string; accent?: string };
 
-/* -------------------------------------------------------------------------- */
-/*                           PHONE FRAME (REUSABLE)                            */
-/* -------------------------------------------------------------------------- */
+/* --------------------------- PHONE FRAME (reusable) ---------------------- */
 function PhoneFrame({
   width,
   height,
@@ -173,19 +154,13 @@ function PhoneFrame({
         <div className="absolute left-1/2 top-5 -translate-x-1/2 h-24 w-48 rounded-3xl bg-black/80" />
         <div className="absolute -left-1 top-28 h-24 w-1.5 rounded-r bg-black/25" />
         <div className="absolute -right-1 top-24 h-14 w-1.5 rounded-l bg-black/25" />
-
-        {/* Screen */}
         <div
           className="absolute inset-[16px] overflow-hidden rounded-[32px] bg-white"
-          style={{
-            background: "linear-gradient(180deg, #F8FBFF 0%, #EEF5FB 100%)",
-          }}
+          style={{ background: "linear-gradient(180deg,#F8FBFF 0%,#EEF5FB 100%)" }}
         >
           {children}
         </div>
       </div>
-
-      {/* gentle float */}
       <motion.div
         className="pointer-events-none absolute inset-0"
         animate={{ y: [0, -6, 0] }}
@@ -195,16 +170,14 @@ function PhoneFrame({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                               CHAT BUBBLES                                 */
-/* -------------------------------------------------------------------------- */
+/* ----------------------------- CHAT BUBBLES ------------------------------ */
 function BotBubble({
   text,
   accent,
   at,
   light,
-  avatarSize = 36,
-  textSizeClass = "text-[17px]",
+  avatarSize = 32,
+  textSizeClass = "text-[12px]",
 }: {
   text: string;
   accent: string;
@@ -214,14 +187,14 @@ function BotBubble({
   textSizeClass?: string;
 }) {
   return (
-    <div className="flex items-start gap-8">
+    <div className="flex items-start gap-6">
       <div className="mt-0.5">
         <HedgieAvatar size={avatarSize} />
       </div>
       <div className="max-w-[78%]">
         <div
           className={cx(
-            "rounded-2xl rounded-tl-sm border px-4 py-3 leading-7",
+            "rounded-2xl rounded-tl-sm border px-3.5 py-2.5 leading-6",
             textSizeClass,
             light
               ? "border-slate-200 bg-white text-slate-900"
@@ -230,7 +203,7 @@ function BotBubble({
         >
           <pre className="whitespace-pre-wrap font-sans">{text}</pre>
         </div>
-        <div className="mt-1 text-[12px] font-medium" style={{ color: accent }}>
+        <div className="mt-1 text-[10px] font-medium" style={{ color: accent }}>
           {at}
         </div>
       </div>
@@ -242,7 +215,7 @@ function UserBubble({
   text,
   at,
   light,
-  textSizeClass = "text-[17px]",
+  textSizeClass = "text-[12px]",
 }: {
   text: string;
   at: string;
@@ -254,14 +227,14 @@ function UserBubble({
       <div className="max-w-[78%] text-right">
         <div
           className={cx(
-            "rounded-2xl rounded-tr-sm px-4 py-3 leading-7 text-white shadow",
+            "rounded-2xl rounded-tr-sm px-3.5 py-2.5 leading-6 text-white shadow",
             textSizeClass,
             light ? "bg-[color:var(--primary)]" : "bg-sky-600/90"
           )}
         >
           {text}
         </div>
-        <div className="mt-1 text-[12px] font-medium text-slate-500">{at}</div>
+        <div className="mt-1 text-[10px] font-medium text-slate-500">{at}</div>
       </div>
     </div>
   );
@@ -275,21 +248,21 @@ function TypingDots({ visible, light }: { visible: boolean; light?: boolean }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="flex items-start gap-8"
+          className="flex items-start gap-6"
         >
           <div className="mt-0.5">
-            <HedgieAvatar size={36} />
+            <HedgieAvatar size={32} />
           </div>
           <div
             className={cx(
-              "flex gap-2 rounded-2xl rounded-tl-sm border px-4 py-3",
+              "flex gap-1.5 rounded-2xl rounded-tl-sm border px-3.5 py-2.5",
               light ? "border-slate-200 bg-white" : "border-[color:var(--outline)] bg-[#0F1A36]"
             )}
           >
             {[0, 1, 2].map((i) => (
               <motion.span
                 key={i}
-                className="h-2 w-2 rounded-full"
+                className="h-1.5 w-1.5 rounded-full"
                 style={{ background: "var(--navy2)" }}
                 animate={{ opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.3 }}
@@ -302,9 +275,7 @@ function TypingDots({ visible, light }: { visible: boolean; light?: boolean }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   PAGE                                     */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- PAGE ----------------------------------- */
 export default function Page() {
   useEffect(() => {
     setBrandTheme();
@@ -329,9 +300,7 @@ export default function Page() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                  NAVBAR                                    */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------- NAVBAR ---------------------------------- */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -349,35 +318,27 @@ function Navbar() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-4">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <a href="#" className="flex items-center gap-3">
           <div className="relative">
             <span
-              className="block h-12 w-12 rounded-2xl"
+              className="block h-10 w-10 rounded-2xl"
               style={{ background: "var(--primary)" }}
             />
-            <BotMessageSquare className="absolute -right-3 -top-3 h-6 w-6 text-[color:var(--teal)]" />
+            <BotMessageSquare className="absolute -right-1 -top-1 h-5 w-5 text-[color:var(--teal)]" />
           </div>
-          <span className="text-3xl font-bold text-[color:var(--ink)]">
-            Hedgie
-          </span>
+          <span className="text-xl font-bold text-[color:var(--ink)]">Hedgie</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-10 text-xl">
-          <a href="#features" className="hover:text-[color:var(--ink)]">
-            Features
-          </a>
-          <a href="#how" className="hover:text-[color:var(--ink)]">
-            How it works
-          </a>
-          <a href="#faq" className="hover:text-[color:var(--ink)]">
-            FAQ
-          </a>
+        <div className="hidden md:flex items-center gap-8 text-base">
+          <a href="#features" className="hover:text-[color:var(--ink)]">Features</a>
+          <a href="#how" className="hover:text-[color:var(--ink)]">How it works</a>
+          <a href="#faq" className="hover:text-[color:var(--ink)]">FAQ</a>
         </div>
 
         <a
           href="https://t.me/"
-          className="rounded-2xl bg-[color:var(--primary)] px-5 py-3 text-xl font-semibold text-white shadow-sm hover:shadow-[0_0_0_6px_rgba(34,158,217,0.15)]"
+          className="rounded-xl bg-[color:var(--primary)] px-4 py-2 text-base font-semibold text-white shadow-sm hover:shadow-[0_0_0_5px_rgba(34,158,217,0.12)]"
         >
           Try on Telegram
         </a>
@@ -386,63 +347,53 @@ function Navbar() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   HERO                                     */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- HERO ----------------------------------- */
 function Hero() {
   return (
-    <section className="relative overflow-hidden py-24 scroll-mt-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-24 px-6 md:grid-cols-2">
+    <section className="relative overflow-hidden py-28 scroll-mt-28">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-20 px-6 md:grid-cols-2">
         {/* LEFT */}
         <div className="order-2 md:order-1">
-          <div className="flex items-center gap-6">
-            <div className="relative h-40 w-40 overflow-hidden rounded-3xl ring-4 ring-[color:var(--outline)]">
-              <Image
-                src="/hedgie.png"
-                alt="Hedgie mascot"
-                fill
-                className="object-cover"
-                sizes="160px"
-                priority
-              />
+          <div className="flex items-center gap-5">
+            <div className="relative h-32 w-32 overflow-hidden rounded-3xl ring-3 ring-[color:var(--outline)]">
+              <Image src="/hedgie.png" alt="Hedgie mascot" fill className="object-cover" sizes="128px" priority />
             </div>
-            <span className="rounded-full border border-[color:var(--outline)] bg-[color:var(--surface)] px-4 py-2 text-lg font-medium text-slate-600">
+            <span className="rounded-full border border-[color:var(--outline)] bg-[color:var(--surface)] px-3 py-1.5 text-sm font-medium text-slate-600">
               Built on Hedera • Telegram Ready
             </span>
           </div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mt-8 text-8xl md:text-9xl font-black tracking-tight text-[color:var(--ink)]"
+            className="mt-6 text-5xl md:text-6xl font-black tracking-tight text-[color:var(--ink)]"
           >
             Meet <span className="text-[color:var(--primary)]">Hedgie</span>
           </motion.h1>
 
-          <p className="mt-6 text-2xl leading-9 max-w-2xl">
-            Your Web3 buddy on chat. Create wallets, send crypto, launch
-            community tokens, gift NFTs, and stake — all in one conversation.
+          <p className="mt-4 max-w-2xl text-lg leading-8">
+            Your Web3 buddy on chat. Create wallets, send crypto, launch community tokens, gift NFTs, and stake — all in one conversation.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-7 flex flex-wrap gap-3">
             <a
               href="https://t.me/"
-              className="inline-flex items-center rounded-2xl bg-[color:var(--primary)] px-6 py-4 text-2xl font-semibold text-white"
+              className="inline-flex items-center rounded-xl bg-[color:var(--primary)] px-5 py-2.5 text-base font-semibold text-white"
             >
-              Say hi on Telegram <ArrowRight className="ml-3 h-6 w-6" />
+              Say hi on Telegram <ArrowRight className="ml-2 h-4 w-4" />
             </a>
             <a
               href="#features"
-              className="inline-flex items-center rounded-2xl border border-[color:var(--outline)] bg-[color:var(--surface)] px-6 py-4 text-2xl font-semibold"
+              className="inline-flex items-center rounded-xl border border-[color:var(--outline)] bg-[color:var(--surface)] px-5 py-2.5 text-base font-semibold"
             >
               Explore features
             </a>
           </div>
         </div>
 
-        {/* RIGHT: Large looping phone */}
+        {/* RIGHT */}
         <div className="order-1 md:order-2 flex justify-center md:justify-end">
           <HeroPhoneDemo />
         </div>
@@ -451,7 +402,7 @@ function Hero() {
   );
 }
 
-/* ---------------------------- HERO PHONE DEMO ------------------------------ */
+/* -------------------------- HERO PHONE DEMO ------------------------------ */
 const HERO_W = 460;
 const HERO_H = 960;
 
@@ -497,21 +448,17 @@ function HeroPhoneDemo() {
 
   return (
     <PhoneFrame width={HERO_W} height={HERO_H}>
-      <div className="flex items-center justify-between px-6 pt-7 text-base text-slate-600">
-        <span>
-          {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
-        </span>
-        <span className="font-semibold" style={{ color: "var(--navy2)" }}>
-          Telegram·Hedgie
-        </span>
+      <div className="flex items-center justify-between px-6 pt-7 text-sm text-slate-600">
+        <span>{new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</span>
+        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgie</span>
       </div>
-      <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-3">
-        <div className="mt-6 flex flex-col gap-6">
+      <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-2">
+        <div className="mt-5 flex flex-col gap-5">
           {messages.map((m) =>
             m.role === "bot" ? (
-              <BotBubble key={m.id} text={m.text} accent={m.accent ?? "var(--primary)"} at={m.at} light textSizeClass="text-[20px]" />
+              <BotBubble key={m.id} text={m.text} accent={m.accent ?? "var(--primary)"} at={m.at} light textSizeClass="text-[12px]" />
             ) : (
-              <UserBubble key={m.id} text={m.text} at={m.at} light textSizeClass="text-[20px]" />
+              <UserBubble key={m.id} text={m.text} at={m.at} light textSizeClass="text-[12px]" />
             )
           )}
           <TypingDots visible={typing} light />
@@ -521,53 +468,47 @@ function HeroPhoneDemo() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                             FEATURES (SECTION)                              */
-/* -------------------------------------------------------------------------- */
+/* --------------------------- FEATURES SECTION ---------------------------- */
 function FeaturesSection() {
   const [active, setActive] = useState<FeatureKey>("register");
 
   return (
-    <section id="features" className="pb-28 pt-10 scroll-mt-32">
+    <section id="features" className="pb-36 pt-14 scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <span
-          className="inline-flex items-center gap-3 rounded-full border border-[color:var(--outline)] bg-[color:var(--surface)] px-4 py-2 text-xl font-semibold"
+          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--outline)] bg-[color:var(--surface)] px-3 py-1.5 text-sm font-semibold"
           style={{ color: "var(--navy2)" }}
         >
           Features
         </span>
-        <h2 className="mt-6 text-7xl md:text-8xl font-extrabold tracking-tight text-[color:var(--ink)]">
-          From sending to staking - Hedgie handles it all!
+        <h2 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-[color:var(--ink)]">
+          From sending to staking — Hedgie handles it all!
         </h2>
-        <p className="mx-auto mt-5 max-w-5xl text-2xl leading-9">
-          Hedgie brings the power of Web3 to your conversations — helping you send value, grow communities, and build savings stories in one chat.
+        <p className="mx-auto mt-3 max-w-4xl text-lg leading-8">
+          Hedgie brings Web3 to your conversations — helping you send value, grow communities, and build savings stories in one chat.
         </p>
       </div>
 
-      <div className="mx-auto mt-20 grid max-w-7xl grid-cols-1 items-start gap-20 px-6 md:grid-cols-2">
-        {/* Left: phone demo bound to active feature */}
+      <div className="mx-auto mt-16 grid max-w-7xl grid-cols-1 items-center gap-20 px-6 md:grid-cols-2">
+        {/* Left: phone demo */}
         <FeaturePhoneDemo active={active} />
 
         {/* Right: controls + details */}
-        <div className="text-left">
-          <div className="flex flex-wrap gap-4">
+        <div className="text-left md:pt-24">
+          <div className="flex flex-wrap gap-3">
             {FEATURES.map((f) => (
               <button
                 key={f.key}
                 onClick={() => setActive(f.key)}
                 className={cx(
-                  "flex items-center gap-3 rounded-2xl border px-5 py-4 text-2xl font-semibold",
+                  "flex items-center gap-2 rounded-xl border px-4 py-2.5 text-base font-semibold",
                   active === f.key
                     ? "border-transparent text-white shadow-sm"
                     : "border-[color:var(--outline)] bg-[color:var(--surface)] hover:bg-white"
                 )}
-                style={
-                  active === f.key
-                    ? { background: "linear-gradient(90deg, var(--primary), var(--teal))" }
-                    : undefined
-                }
+                style={active === f.key ? { background: "linear-gradient(90deg, var(--primary), var(--teal))" } : undefined}
               >
-                <f.icon className="h-7 w-7" />
+                <f.icon className="h-5 w-5" />
                 {f.label}
               </button>
             ))}
@@ -583,69 +524,40 @@ function FeaturesSection() {
 function FeatureDetail({ feature }: { feature: Feature }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="mt-10"
+      className="mt-7"
     >
-      <h3 className="text-4xl md:text-5xl font-bold text-[color:var(--ink)]">
-        {feature.title}
-      </h3>
-      <p className="mt-4 text-2xl leading-9 max-w-3xl">{feature.desc}</p>
+      <h3 className="text-3xl md:text-4xl font-bold text-[color:var(--ink)]">{feature.title}</h3>
+      <p className="mt-3 max-w-3xl text-lg leading-8">{feature.desc}</p>
     </motion.div>
   );
 }
 
-/* ------------------------ FEATURES PHONE DEMO (SYNC) ----------------------- */
+/* -------------------- FEATURES PHONE DEMO (synced) ----------------------- */
 const FEAT_W = 420;
 const FEAT_H = 900;
 
 function FeaturePhoneDemo({ active }: { active: FeatureKey }) {
   const feat = FEATURES.find((f) => f.key === active)!;
-
   const [messages, setMessages] = useState<Msg[]>([
-    {
-      id: "intro",
-      role: "bot",
-      text: "Welcome! Try /register, /send, /launchToken, /stake",
-      at: nowTime(),
-      accent: "var(--primary)",
-    },
+    { id: "intro", role: "bot", text: "Welcome! Try /register, /send, /launchToken, /stake", at: nowTime(), accent: "var(--primary)" },
   ]);
   const [typing, setTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Restart the mini loop whenever active changes
   useEffect(() => {
-    setMessages([
-      {
-        id: "intro",
-        role: "bot",
-        text: "Welcome! Try /register, /send, /launchToken, /stake",
-        at: nowTime(),
-        accent: "var(--primary)",
-      },
-    ]);
+    setMessages([{ id: "intro", role: "bot", text: "Welcome! Try /register, /send, /launchToken, /stake", at: nowTime(), accent: "var(--primary)" }]);
 
     const t1 = setTimeout(() => {
       setMessages((p) => [...p, { id: crypto.randomUUID(), role: "user", text: feat.userLine, at: nowTime() }]);
       setTyping(true);
-
       const t2 = setTimeout(() => {
         setTyping(false);
-        setMessages((p) => [
-          ...p,
-          {
-            id: crypto.randomUUID(),
-            role: "bot",
-            text: feat.botReply,
-            at: nowTime(),
-            accent: feat.accent,
-          },
-        ]);
+        setMessages((p) => [...p, { id: crypto.randomUUID(), role: "bot", text: feat.botReply, at: nowTime(), accent: feat.accent }]);
       }, 1200);
-
       return () => clearTimeout(t2);
     }, 600);
 
@@ -659,22 +571,17 @@ function FeaturePhoneDemo({ active }: { active: FeatureKey }) {
 
   return (
     <PhoneFrame width={FEAT_W} height={FEAT_H} tilt={-1}>
-      <div className="flex items-center justify-between px-6 pt-7 text-base text-slate-600">
-        <span>
-          {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
-        </span>
-        <span className="font-semibold" style={{ color: "var(--navy2)" }}>
-          Telegram·Hedgie
-        </span>
+      <div className="flex items-center justify-between px-6 pt-7 text-sm text-slate-600">
+        <span>{new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</span>
+        <span className="font-semibold" style={{ color: "var(--navy2)" }}>Telegram·Hedgie</span>
       </div>
-
-      <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-3">
-        <div className="mt-6 flex flex-col gap-6">
+      <div ref={scrollRef} className="h-full overflow-y-auto px-5 pb-8 pt-2">
+        <div className="mt-5 flex flex-col gap-5">
           {messages.map((m) =>
             m.role === "bot" ? (
-              <BotBubble key={m.id} text={m.text} accent={m.accent ?? "var(--primary)"} at={m.at} light textSizeClass="text-[20px]" />
+              <BotBubble key={m.id} text={m.text} accent={m.accent ?? "var(--primary)"} at={m.at} light textSizeClass="text-[12px]" />
             ) : (
-              <UserBubble key={m.id} text={m.text} at={m.at} light textSizeClass="text-[20px]" />
+              <UserBubble key={m.id} text={m.text} at={m.at} light textSizeClass="text-[12px]" />
             )
           )}
           <TypingDots visible={typing} light />
@@ -684,9 +591,7 @@ function FeaturePhoneDemo({ active }: { active: FeatureKey }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                               HOW IT WORKS                                 */
-/* -------------------------------------------------------------------------- */
+/* ----------------------------- HOW IT WORKS ------------------------------ */
 function HowItWorks() {
   const steps = [
     {
@@ -710,32 +615,28 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="py-32 scroll-mt-32">
+    <section id="how" className="py-40 scroll-mt-28">
       <div className="mx-auto max-w-7xl px-6 text-center">
-        <h2 className="text-7xl md:text-8xl font-extrabold tracking-tight text-[color:var(--ink)]">
-          How it works
-        </h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[color:var(--ink)]">How it works</h2>
 
-        <div className="mt-16 grid gap-10 md:grid-cols-3">
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
-              className="rounded-3xl border border-[color:var(--outline)] bg-[color:var(--surface)] p-10 text-left shadow-sm"
+              className="rounded-3xl border border-[color:var(--outline)] bg-[color:var(--surface)] p-8 text-left shadow-sm"
             >
               <div
-                className="grid h-20 w-20 place-items-center rounded-2xl"
+                className="grid h-16 w-16 place-items-center rounded-xl"
                 style={{ background: "linear-gradient(135deg,var(--muted),#EAF5FF)" }}
               >
-                <s.icon className="h-10 w-10" style={{ color: "var(--primary)" }} />
+                <s.icon className="h-8 w-8" style={{ color: "var(--primary)" }} />
               </div>
-              <h3 className="mt-5 text-4xl font-semibold text-[color:var(--ink)]">
-                {s.title}
-              </h3>
-              <p className="mt-3 text-2xl leading-9">{s.body}</p>
+              <h3 className="mt-4 text-2xl font-semibold text-[color:var(--ink)]">{s.title}</h3>
+              <p className="mt-2 text-lg leading-8">{s.body}</p>
             </motion.div>
           ))}
         </div>
@@ -744,44 +645,26 @@ function HowItWorks() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                    FAQ                                     */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------- FAQ ----------------------------------- */
 function Faq() {
   const items = [
-    {
-      q: "Is Hedgie self-custodial?",
-      a: "Yes. Keys are created for you with recovery options. You stay in control while enjoying chat-native UX.",
-    },
-    {
-      q: "Which chains are supported?",
-      a: "Powered by Hedera for speed, low cost, and transparency.",
-    },
-    {
-      q: "Does this work in groups?",
-      a: "Absolutely — tipping, token launches, leaderboards, and quests thrive in Telegram groups.",
-    },
+    { q: "Is Hedgie self-custodial?", a: "Yes. Keys are created for you with recovery options. You stay in control while enjoying chat-native UX." },
+    { q: "Which chains are supported?", a: "Powered by Hedera for speed, low cost, and transparency." },
+    { q: "Does this work in groups?", a: "Absolutely — tipping, token launches, leaderboards, and quests thrive in Telegram groups." },
   ];
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-32 scroll-mt-32">
+    <section id="faq" className="py-36 scroll-mt-28">
       <div className="mx-auto max-w-4xl px-6">
-        <h2 className="text-7xl font-extrabold tracking-tight text-[color:var(--ink)] text-center">
-          FAQ
-        </h2>
-        <div className="mt-12 divide-y divide-[color:var(--outline)] rounded-3xl border border-[color:var(--outline)] bg-[color:var(--surface)]">
+        <h2 className="text-4xl font-extrabold tracking-tight text-[color:var(--ink)] text-center">FAQ</h2>
+        <div className="mt-10 divide-y divide-[color:var(--outline)] rounded-3xl border border-[color:var(--outline)] bg-[color:var(--surface)]">
           {items.map((it, i) => (
-            <div key={i} className="p-8">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between text-left"
-              >
-                <span className="text-3xl font-semibold text-[color:var(--ink)]">
-                  {it.q}
-                </span>
+            <div key={i} className="p-7">
+              <button onClick={() => setOpen(open === i ? null : i)} className="flex w-full items-center justify-between text-left">
+                <span className="text-xl font-semibold text-[color:var(--ink)]">{it.q}</span>
                 <motion.span animate={{ rotate: open === i ? 90 : 0 }}>
-                  <ArrowRight className="h-8 w-8 text-slate-400" />
+                  <ArrowRight className="h-6 w-6 text-slate-400" />
                 </motion.span>
               </button>
               <AnimatePresence initial={false}>
@@ -791,7 +674,7 @@ function Faq() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.25 }}
-                    className="overflow-hidden pt-3 text-2xl leading-9"
+                    className="overflow-hidden pt-2 text-lg leading-8"
                   >
                     {it.a}
                   </motion.p>
@@ -805,12 +688,10 @@ function Faq() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   FOOTER                                   */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- FOOTER --------------------------------- */
 function Footer() {
   return (
-    <footer className="border-t border-[color:var(--outline)] py-16 text-center text-xl text-slate-500">
+    <footer className="border-t border-[color:var(--outline)] py-12 text-center text-sm text-slate-500">
       © {new Date().getFullYear()} Hedgie — Built with ❤️ on Hedera
     </footer>
   );
