@@ -373,7 +373,7 @@ function Hero() {
           </motion.h1>
 
           <p className="mt-4 max-w-2xl text-lg leading-8">
-            Your Web3 buddy on chat. Create wallets, send crypto, launch community tokens, gift NFTs, and stake — all in one conversation.
+            Your Web3 buddy on chat. Create wallets, send crypto, launch community tokens, gift NFTs, and stake, all without leaving Telegram.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
